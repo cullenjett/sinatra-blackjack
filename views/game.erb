@@ -1,0 +1,12 @@
+<html>
+<h1>Welcome to the table, <%= "#{session[:player_name]}!" %> </h1>
+
+Your cards:
+<ul>
+  <% session[:player_cards].each do |card| %>
+    <li> <%= card.to_s %> </li>
+  <% end %>
+
+</ul>
+
+</html>
