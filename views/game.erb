@@ -5,8 +5,8 @@
       <br />
     
       <% if @show_hit_stay_buttons %>
-      <h4><%= "#{session[:player_name]}'s Total: #{calculate_total(session[:player_cards])}" %></h4>
-        <h6 class="text-center" id="do_what">What would you like to do?</h6>
+        <h4 class="text-center"><%= "#{session[:player_name]}'s Total: #{calculate_total(session[:player_cards])}" %></h4>
+        <h6 class="text-center">What would you like to do?</h6>
         <div id="hit_stay_box">
           <form id="hit_form" action="/game/player/hit" method="post">
             <input type="submit" class="btn btn-danger btn-large" value="Hit" />
@@ -19,27 +19,37 @@
       <% end %>
 
       <% if @show_dealer_hit_button %>
-      <h4><%= "Dealer's Total: #{calculate_total(session[:dealer_cards])}" %></h4>
+        <h4 class="text-center"><%= "Dealer's Total: #{calculate_total(session[:dealer_cards])}" %></h4>
         <form id="dealer_hit_form" action="/game/dealer/hit" method="post">
           <input type="submit" class="btn btn-primary" value="Dealer hits &rarr;"/>
         </form>
       <% end %>
+
+      <% if @play_again %>
+        <h4 class="text-center">Play Again?</h4>
+        <br/>
+        <a href="/game" id="hit_form" class="btn btn-success btn-large">Yes</a>
+        <a href="/game_over" id="stay_form" class="btn btn-danger btn-large">No</a>
+      <% end %>
+
     </div>
 
 
     <div class="span9">
       <h2 class="text-center">TeaLeaf Academy Blackjack</h2>
       
-      <h3>Dealer's Cards</h3>
-      
+      <h4>Dealer's Cards</h4>
       <div class="well">
-        <% session[:dealer_cards].each do |card| %>
-          <%= card_image(card) %>
+        <% session[:dealer_cards].each_with_index do |card, index| %>
+          <% if session[:turn] != "dealer" && index == 0 %>
+            <img class="card_image" src="/images/cards/cover.jpg" />
+          <% else %>
+            <%= card_image(card) %>
+          <% end %>
         <% end %>
       </div>
       
-      <h3><%= "#{session[:player_name]}'s Cards" %></h3>
-      
+      <h4><%= "#{session[:player_name]}'s Cards" %></h4>
       <div class="well">
         <% session[:player_cards].each do |card| %>
           <%= card_image(card) %>

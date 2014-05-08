@@ -25,14 +25,12 @@
   margin-top: 235px;
 }
 
-#do_what {
-  border-top: 1px solid black;
-  padding-top: 20px;
-  padding-bottom: 10px;
-}
-
 #dealer_hit_form {
   float: left;
   padding-left: 30px;
   padding-top: 10px;
+}
+
+#play_again_button {
+  margin: auto;
 }
