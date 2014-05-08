@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>Blackjack</title>
@@ -11,7 +10,8 @@
       <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-              <li><a href="/">Start Over</a></li>
+              <li><a href="/">Start Fresh</a></li>
+              <li><a href="/game">New Game</a></li>
               <li><a href="http://rubyforyourthoughts.tumblr.com/">A Cullen Jett Joint</a></li>
             </ul>
         </div>
@@ -20,7 +20,9 @@
 
   <div class="container">
     <%if @error %>
-      <div class="alert alert-error"><%=@error%></div>
+      <div class="alert alert-error text-center"><%=@error%></div>
+    <% elsif @success %>
+      <div class="alert alert-success text-center"><%=@success%></div>
     <% end %>
       <%= yield %>
   </div>

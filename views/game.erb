@@ -1,12 +1,51 @@
-<html>
-<h1>Welcome to the table, <%= "#{session[:player_name]}!" %> </h1>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3 well" id="score_box">
+      
+      <br />
+    
+      <% if @show_hit_stay_buttons %>
+      <h4><%= "#{session[:player_name]}'s Total: #{calculate_total(session[:player_cards])}" %></h4>
+        <h6 class="text-center" id="do_what">What would you like to do?</h6>
+        <div id="hit_stay_box">
+          <form id="hit_form" action="/game/player/hit" method="post">
+            <input type="submit" class="btn btn-danger btn-large" value="Hit" />
+          </form>
+        
+          <form id="stay_form" action="/game/player/stay" method="post">
+              <input type="submit" class="btn btn-success btn-large" value ="Stay" />
+          </form>
+        </div>
+      <% end %>
 
-Your cards:
-<ul>
-  <% session[:player_cards].each do |card| %>
-    <li> <%= card.to_s %> </li>
-  <% end %>
+      <% if @show_dealer_hit_button %>
+      <h4><%= "Dealer's Total: #{calculate_total(session[:dealer_cards])}" %></h4>
+        <form id="dealer_hit_form" action="/game/dealer/hit" method="post">
+          <input type="submit" class="btn btn-primary" value="Dealer hits &rarr;"/>
+        </form>
+      <% end %>
+    </div>
 
-</ul>
 
-</html>
+    <div class="span9">
+      <h2 class="text-center">TeaLeaf Academy Blackjack</h2>
+      
+      <h3>Dealer's Cards</h3>
+      
+      <div class="well">
+        <% session[:dealer_cards].each do |card| %>
+          <%= card_image(card) %>
+        <% end %>
+      </div>
+      
+      <h3><%= "#{session[:player_name]}'s Cards" %></h3>
+      
+      <div class="well">
+        <% session[:player_cards].each do |card| %>
+          <%= card_image(card) %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
