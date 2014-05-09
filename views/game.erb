@@ -2,11 +2,18 @@
   <div class="row-fluid">
     <div class="span3 well" id="score_box">
       
-      <br />
-    
+      <div id="bet_info">
+        <h5 class="text-center"><%= "#{session[:player_name]} has: $#{session[:player_pot]}" %></h5>
+        <h5 class="text-center">Bet this round: $<%= session[:player_bet] %></h5>
+      </div>
+
       <% if @show_hit_stay_buttons %>
-        <h4 class="text-center"><%= "#{session[:player_name]}'s Total: #{calculate_total(session[:player_cards])}" %></h4>
-        <h6 class="text-center">What would you like to do?</h6>
+        <div class="score_info"> 
+          <h4 class="text-center"><%= "#{session[:player_name]}'s Total: #{calculate_total(session[:player_cards])}" %>
+          </h4>
+          <h6 class="text-center">What would you like to do?</h6>
+        </div>
+          
         <div id="hit_stay_box">
           <form id="hit_form" action="/game/player/hit" method="post">
             <input type="submit" class="btn btn-danger btn-large" value="Hit" />
@@ -19,16 +26,32 @@
       <% end %>
 
       <% if @show_dealer_hit_button %>
-        <h4 class="text-center"><%= "Dealer's Total: #{calculate_total(session[:dealer_cards])}" %></h4>
+        <div class="score_info">
+          <h4 class="text-center"><%= "Dealer has: #{calculate_total(session[:dealer_cards])}" %></h4>
+        </div>
+
         <form id="dealer_hit_form" action="/game/dealer/hit" method="post">
-          <input type="submit" class="btn btn-primary" value="Dealer hits &rarr;"/>
+          <input type="submit" class="btn btn-primary btn-large" value="Dealer hits &rarr;"/>
         </form>
       <% end %>
 
-      <% if @play_again %>
-        <h4 class="text-center">Play Again?</h4>
+      <% if @play_again && session[:player_pot] > 0 %>
+        <div class="score_info">
+          <h4 class="text-center">Play Again?</h4>
+        </div>
+
         <br/>
-        <a href="/game" id="hit_form" class="btn btn-success btn-large">Yes</a>
+
+        <a href="/bet" id="hit_form" class="btn btn-success btn-large">Yes</a>
+        <a href="/game_over" id="stay_form" class="btn btn-danger btn-large">No</a>
+      <% elsif @play_again && session[:player_pot] == 0 %>  
+        <div class="score_info">
+          <h4 class="text-center">You're out of money. Start fresh?</h4>
+        </div>
+
+        <br/>
+
+        <a href="/" id="hit_form" class="btn btn-success btn-large">Yes</a>
         <a href="/game_over" id="stay_form" class="btn btn-danger btn-large">No</a>
       <% end %>
 
@@ -36,7 +59,7 @@
 
 
     <div class="span9">
-      <h2 class="text-center">TeaLeaf Academy Blackjack</h2>
+      <h2 class="text-center">Blackjack</h2>
       
       <h4>Dealer's Cards</h4>
       <div class="well">

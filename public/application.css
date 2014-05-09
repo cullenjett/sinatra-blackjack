@@ -1,7 +1,7 @@
 #hit_form {
   float: left;
-  margin-left: 5px;
-  margin-right: 15px;
+  margin-left: 6px;
+  margin-right: 19px;
 }
 
 #stay_form {
@@ -22,15 +22,39 @@
 }
 
 #score_box {
-  margin-top: 235px;
+  position: relative;
+  top: 220px;
+}
+
+.score_info {
+  padding-top: 20px;
+}
+
+#bet_info {
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
 }
 
 #dealer_hit_form {
   float: left;
-  padding-left: 30px;
+  padding-left: 10px;
   padding-top: 10px;
 }
 
 #play_again_button {
   margin: auto;
 }
+
+body {
+  background-color: #fafafa;
+  color: #4C4C4C;
+}
+
+.well {
+  border-radius: 10px;
+  background-color: #efefef;
+}
+
+
+
+
