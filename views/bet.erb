@@ -4,7 +4,7 @@
   <img id="tealeaf_logo" class="img-circle" src="https://coursereport_prod.s3.amazonaws.com/rich/rich_files/rich_files/26/s300/tealeaf-academy-logo.png?1384907431">
 
   <p class="text-center">Enter a bet for this round.</p>
-  <p class="text-center">You currently have $<%= session[:player_pot].to_i %></p>
+  <p class="text-center">You currently have: $<%= session[:player_pot].to_i %>.</p>
   <form class="form-search text-center" action="/bet" method="post">
     <input class="span2" type="text" name="bet_amount"/>
     <button type="submit" class="btn btn-primary">

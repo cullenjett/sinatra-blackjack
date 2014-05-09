@@ -1,10 +1,22 @@
+<div id="game">
+
+<%if @loser %>
+  <div class="alert alert-error text-center"><%=@loser%></div>
+<% elsif @winner %>
+  <div class="alert alert-success text-center"><%=@winner%></div>
+<% end %>
+
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span3 well" id="score_box">
       
+      <!-- LEFT SIDE OF GAME SCREEN -->
+
       <div id="bet_info">
-        <h5 class="text-center"><%= "#{session[:player_name]} has: $#{session[:player_pot]}" %></h5>
-        <h5 class="text-center">Bet this round: $<%= session[:player_bet] %></h5>
+        <h4 class="text-center"><%= "#{session[:player_name]}'s wallet:"%></h4>
+          <p class="text-center"> <%= "$#{session[:player_pot]}" %></p>
+        <h4 class="text-center">Bet this round:</h4>
+          <p class="text-center">$<%= session[:player_bet] %></p>
       </div>
 
       <% if @show_hit_stay_buttons %>
@@ -46,7 +58,7 @@
         <a href="/game_over" id="stay_form" class="btn btn-danger btn-large">No</a>
       <% elsif @play_again && session[:player_pot] == 0 %>  
         <div class="score_info">
-          <h4 class="text-center">You're out of money. Start fresh?</h4>
+          <p class="text-center">You're out of money. Change your name and start fresh?</p>
         </div>
 
         <br/>
@@ -57,6 +69,8 @@
 
     </div>
 
+
+    <!-- RIGHT SIDE OF GAME SCREEN  -->
 
     <div class="span9">
       <h2 class="text-center">Blackjack</h2>
@@ -81,4 +95,6 @@
 
     </div>
   </div>
+</div>
+
 </div>

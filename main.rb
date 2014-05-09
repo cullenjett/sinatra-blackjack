@@ -62,7 +62,7 @@ helpers do
 
   def winner!(msg)
     @show_hit_stay_buttons = false
-    @success = "<strong>#{session[:player_name]} wins!</strong> #{msg}"
+    @winner = "<strong>#{session[:player_name]} wins!</strong> #{msg}"
     session[:player_pot] = session[:player_pot] + session[:player_bet]
     @play_again = true
   end
@@ -70,7 +70,7 @@ helpers do
 
   def loser!(msg)
     @show_hit_stay_buttons = false
-    @error = "<strong>#{session[:player_name]} loses.</strong> #{msg}"
+    @loser = "<strong>#{session[:player_name]} loses.</strong> #{msg}"
     session[:player_pot] = session[:player_pot] - session[:player_bet]
     @play_again = true
   end
@@ -78,7 +78,7 @@ helpers do
 
   def tie!(msg)
     @show_hit_stay_buttons = false
-    @success = "<strong>It's a tie.</strong> #{msg}"
+    @winner = "<strong>It's a tie.</strong> #{msg}"
     @play_again = true
   end
 end #helpers
@@ -158,6 +158,7 @@ get '/game' do
   if player_total == BLACKJACK_AMT
     winner!("That's a blackjack!")
   end
+
   erb :game
 end
 
@@ -172,7 +173,7 @@ post '/game/player/hit' do
     loser!("Bust with #{player_total}. Too many hits, fool!")
   end
 
-  erb :game
+  erb :game, layout: false
 end
 
 
@@ -201,7 +202,7 @@ get '/game/dealer' do
     @show_dealer_hit_button = true
   end
 
-  erb :game
+  erb :game, layout: false
 end
 
 
@@ -223,7 +224,8 @@ get '/game/compare' do
   else
     tie!("Both #{session[:player_name]} and the dealer have #{player_total}")
   end
-  erb :game
+
+  erb :game, layout: false
 end
 
 
